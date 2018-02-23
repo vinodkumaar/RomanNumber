@@ -31,7 +31,7 @@ class RomanNumberTest {
     @Test
     fun shouldNotBeAbleToAppendTwoConsecutiveNumeralsOfDifferentFaceValueof5() {
         assertEquals(RomanNumber(NotANumeral), RomanNumber(V).append(L))
-        assertEquals(RomanNumber(NotANumeral), RomanNumber(L).append(V))
+        assertEquals(RomanNumber(NotANumeral), RomanNumber(D).append(M))
     }
 
     @Test
@@ -50,6 +50,11 @@ class RomanNumberTest {
     fun shouldBeAbleToAppendNumeralsOfFaceValue5ToImmediateLowerNumeral() {
         assertEquals(4, RomanNumber(I).append(V).toDecimal())
         assertEquals(400, RomanNumber(C).append(D).toDecimal())
+    }
+
+    @Test
+    fun shouldBeAbleToAppendNumeralsOfFaceValue5ToImmediateHigherOrder() {
+        assertEquals(555, RomanNumber(D).append(L).append(V).toDecimal())
     }
 
     @Test

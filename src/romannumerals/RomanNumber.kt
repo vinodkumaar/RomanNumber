@@ -45,14 +45,15 @@ class RomanNumber {
     private fun isInvalidOperation(lastDigit: RomanDecimalDigitCognate, numeral: Numeral): Boolean {
         val hasANotANumeralValue = lastDigit.equals(RomanDecimalDigitCognate(listOf(NotANumeral)))
                 || numeral == NotANumeral
-        val areTheseBothWithFaceValueOf5 = lastDigit.faceValue() == 5 && numeral.faceValue == 5
+        val areTheseBothWithFaceValueOf5ExceptDecreasingMagnitude = (lastDigit.faceValue() == 5 && numeral.faceValue == 5)
+                && lastDigit.placeValue() <= numeral.placeValue
         val isTheNumeralValueMoreThanAMagnitudeHigherThanPreviousDigit = numeral.placeValue / lastDigit.placeValue() > ONE_MAGNITUDE_TEN_POWER_ONE
         val isFiveTimesPreviousDigitExceedsTheNumeralValueIfTheNumeralIsAGreaterNumber = numeral.placeValue > lastDigit.placeValue()
                 && lastDigit.placeValue() * 5 > numeral.placeValue
         val isTheNumeralNegatingThePreviousDigit = lastDigit.placeValue() / numeral.placeValue == MAX_DIGIT_FACE_VALUE
         return (
                 hasANotANumeralValue
-                        || areTheseBothWithFaceValueOf5
+                        || areTheseBothWithFaceValueOf5ExceptDecreasingMagnitude
                         || isTheNumeralValueMoreThanAMagnitudeHigherThanPreviousDigit
                         || isFiveTimesPreviousDigitExceedsTheNumeralValueIfTheNumeralIsAGreaterNumber
                         || isTheNumeralNegatingThePreviousDigit
